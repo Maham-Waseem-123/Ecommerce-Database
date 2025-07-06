@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="acs-1-year-2015.sqlite" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1380"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="Online_Retail" custom_title="0" dock_id="5" table="4,13:mainOnline_Retail"/><dock_state state="000000ff00000000fd0000000100000002000003910000025efc0100000003fb000000160064006f0063006b00420072006f00770073006500310100000000000003910000000000000000fb000000160064006f0063006b00420072006f00770073006500340100000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f00770073006500350100000000ffffffff0000011e00ffffff000002690000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1*">-- Adjusting time WINDOW
+
+
+/*UPDATE Online_Retail
+SET TimeWindow = CASE
+    WHEN Time &gt; '08:00:00' AND Time &lt; '12:00:00' THEN 'Morning'
+    WHEN Time &gt;= '12:00:00' AND Time &lt; '17:00:00' THEN 'Afternoon'
+    WHEN Time &gt;= '17:00:00' AND Time &lt; '20:00:00' THEN 'Evening'
+    WHEN Time &gt;= '20:00:00' OR Time &lt; '01:00:00' THEN 'Night'
+    WHEN Time &gt;= '01:00:00' AND Time &lt; '04:00:00' THEN 'Mid Night'
+    WHEN Time &gt;= '04:00:00' AND Time &lt; '08:00:00' THEN 'Early Morning'
+    ELSE 'Unknown'
+END;
+
+
+SELECT * FROM Online_Retail;
+
+*/
+
+-- For Summary Statistics for Quantitative Columns
+
+/*SELECT 
+    COUNT(*) AS Total_Transactions,
+    SUM(Quantity) AS Total_Quantity,
+    AVG(Quantity) AS Average_Quantity,
+    MAX(Quantity) AS Max_Quantity,
+    MIN(Quantity) AS Min_Quantity
+FROM Online_Retail;
+
+--Category-Wise Summary
+
+SELECT 
+    Categories,
+    COUNT(*) AS Number_of_Transactions,
+    SUM(Quantity) AS Total_Quantity,
+    AVG(Quantity) AS Average_Quantity
+FROM Online_Retail
+GROUP BY Categories
+ORDER BY Total_Quantity DESC;
+
+--Time-Based Analysis
+
+SELECT 
+    TimeWindow,
+    COUNT(*) AS Number_of_Transactions,
+    SUM(Quantity) AS Total_Quantity
+FROM Online_Retail
+GROUP BY TimeWindow
+ORDER BY Number_of_Transactions DESC;
+
+
+-- Country-Wise Analysis
+
+SELECT 
+    Country,
+    COUNT(*) AS Number_of_Transactions,
+    SUM(Quantity) AS Total_Quantity
+FROM Online_Retail
+GROUP BY Country
+ORDER BY Total_Quantity DESC;
+
+*/
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
